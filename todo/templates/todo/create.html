@@ -1,0 +1,17 @@
+<form action="todo/create/{{todo_id}}" method="post">
+{% csrf_token %}
+<fieldset>
+    <legend><h1>Create Todo</h1></legend>
+    {%  if error_message %}<p><strong>{{error_messagem}}</strong></p>{% endif %}
+    <label> 
+        description: 
+        <input id="description" placeholder="description" type="text">
+    </div>
+    <div> 
+        Priority: 
+        <input type="radio" name="priority" id="high">High</input>
+        <input type="radio" name="priority" id="medium">Medium</input>
+        <input type="radio" name="priority" id="low">Low</input>
+        <input type="radio" name="priority" id="none" checked>None</input>
+    </div> 
+    <button type="submit"/>

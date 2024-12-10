@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.template import loader
 
@@ -14,12 +14,11 @@ def index(request):
     return render(request, "todo/index.html", context)
 
 def detail(request, todo_id):
-    try:
-        todo = Todo.objects.get(pk=todo_id)
-    except:
-        raise Http404("Todo does not exist")
-
+    todo = get_object_or_404(Todo, pk=todo_id)
     return render(request, "todo/detail.html", {"todo": todo})
+
+def create(request):
+    return render(request, 'todo/create.html')
 
 def results(request, todo_id):
     return HttpResponse("You're looking at the results of todo %s." % todo_id)
