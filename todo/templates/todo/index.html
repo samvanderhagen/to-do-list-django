@@ -1,7 +1,7 @@
 {% if latest_todo_list %}
-    <ul>
+    <ul style="list-style: none;">
     {% for todo in latest_todo_list %}
-        <li><a href="{% url 'detail' todo.id %}">{{todo.description}}</a></li>
+    <li><a href="{% url 'detail' todo.id %}" style="padding: 10px;cursor: pointer">{{todo.description}}</a><button style="cursor:pointer" onclick="window.location.href='/todo/remove/{{todo.id}}/'">Delete</button></li>
     {% endfor %}
     </ul>
 {% else %}

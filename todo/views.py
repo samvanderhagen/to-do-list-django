@@ -35,8 +35,11 @@ def created(request):
     else:
         return HttpResponse("Invalid request method")
     
+def remove(request, todo_id):
+    todo = Todo.objects.get(id=todo_id)
+    todo.delete()
 
-def results(request, todo_id):
-    return HttpResponse("You're looking at the results of todo %s." % todo_id)
+    return redirect("/todo/")
+
 
 
