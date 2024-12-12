@@ -1,18 +1,21 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static '/todo/create.css' %}">    
+</head>
 <form action="/todo/created/" method="post">
 {% csrf_token %}
-<fieldset>
-    <legend><h1>Create Todo</h1></legend>
+    <h1>Create Todo</h1>
     {%  if error_message %}<p><strong>{{error_messagem}}</strong></p>{% endif %}
     <div> 
-        <label for="description">description: </label>
-        <input id="description" name="description" placeholder="description" type="text">
+        <label for="description">Description: </label>
+        <input id="description" class="description" name="description" placeholder="description" type="text"maxlength="180" required />
     </div>
-    <div> 
+    <div class="priority"> 
         <label for="priority">Priority: </label> 
-        <input type="radio" name="priority" value="H" id="high">High</input>
-        <input type="radio" name="priority" value="M" id="medium">Medium</input>
-        <input type="radio" name="priority" value="L" id="low">Low</input>
-        <input type="radio" name="priority" value="N" id="none" checked>None</input>
+        <input type="radio" name="priority" class="H" value="H" id="high"> <label for="high" class="select">High</label></input>
+        <input type="radio" name="priority" class="M" value="M" id="medium"> <label for="medium" class="select">Medium</label></input>
+        <input type="radio" name="priority" class="L" value="L" id="low"> <label for="low" class="select">Low</label></input>
+        <input type="radio" name="priority" class="N" value="N" id="none" checked>  <label for="none" class="select">None</label></input>
     </div> 
-    <button type="submit">Create Todo</button> 
+    <button type="submit" class="submit">Create Todo</button> 
 </form>

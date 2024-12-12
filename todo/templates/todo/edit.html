@@ -1,0 +1,21 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static '/todo/create.css' %}">    
+</head>
+<form action="/todo/edit/{{todo.id}}/" method="post">
+{% csrf_token %}
+    <h1>Edit Todo</h1>
+    {%  if error_message %}<p><strong>{{error_messagem}}</strong></p>{% endif %}
+    <div> 
+        <label for="description">Description: </label>
+        <input id="description" value="{{todo.description}}" class="description" name="description" placeholder="description" type="text" required />
+    </div>
+    <div class="priority"> 
+        <label for="priority">Priority: </label> 
+        <input type="radio" class="radio" name="priority" {% if todo.priority == "H" %} checked{% endif %} class="H" value="H" id="high"> <label for="high" class="select">High</label></input>
+        <input type="radio" class="radio" name="priority" {% if todo.priority == "M" %} checked{% endif %} class="M" value="M" id="medium"> <label for="medium" class="select">Medium</label></input>
+        <input type="radio" class="radio" name="priority" {% if todo.priority == "L" %} checked{% endif %} class="L" value="L" id="low"> <label for="low" class="select">Low</label></input>
+        <input type="radio" class="radio" name="priority" {% if todo.priority == "N" %} checked{% endif %} class="N" value="N" id="none">  <label for="none" class="select">None</label></input>
+    </div> 
+    <button type="submit" class="submit">Edit Todo</button> 
+</form>

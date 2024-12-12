@@ -1,10 +1,20 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static '/todo/style.css' %}">    
+</head>
+<div class="todo__main">
 {% if latest_todo_list %}
     <ul style="list-style: none;">
     {% for todo in latest_todo_list %}
-    <li><a href="{% url 'detail' todo.id %}" style="padding: 10px;cursor: pointer">{{todo.description}}</a><button style="cursor:pointer" onclick="window.location.href='/todo/remove/{{todo.id}}/'">Delete</button></li>
+    <li>
+        <a href="{% url 'detail' todo.id %}" class="todo description {{todo.priority}}">{{todo.description}} &nbsp;&nbsp;&nbsp;{{todo.priority}}</a> 
+        <button class="edit" onclick="window.location.href='/todo/edit/{{todo.id}}/'">Edit</button> 
+        <button class="delete" onclick="window.location.href='/todo/remove/{{todo.id}}/'">Delete</button>
+    </li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No Todos available</p>
 {% endif %}
-<button onclick="window.location.href='/todo/create/'">Crete Todo</button> 
+<button class="create" onclick="window.location.href='/todo/create/'">Crete Todo</button> 
+</div>

@@ -1,3 +1,6 @@
+import json
+
+from django.utils import timezone
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.db.models import F
@@ -11,7 +14,7 @@ from .models import Todo
 
 # Create your views here.
 def index(request):
-    latest_todo_list = Todo.objects.order_by("-pub_date")
+    latest_todo_list = Todo.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")
     context = {
             "latest_todo_list": latest_todo_list
     }
@@ -41,5 +44,18 @@ def remove(request, todo_id):
 
     return redirect("/todo/")
 
+def edit(request, todo_id):
+    try:
+        todo = Todo.objects.get(id=todo_id)
+    except:
+        return redirect("/todo/")
+    
 
+    if request.method == "POST":
+        todo.description = request.POST.dict()['description']
+        todo.priority = request.POST.dict()['priority']
+        todo.save()
+        return redirect("/todo/")
+
+    return render(request, 'todo/edit.html', {"todo": todo})
 

@@ -1,1 +1,8 @@
-<h1>{{todo.description}}</h1>
+{% load static %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static '/todo/detail.css' %}">    
+</head>
+<div class="todo">
+    <h1>- {{todo.description}} has priority {{todo.get_priority_display}}</h1>
+    <button>Go Back</button>
+</div>
